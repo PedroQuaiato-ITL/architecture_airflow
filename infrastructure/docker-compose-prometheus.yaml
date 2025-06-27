@@ -1,0 +1,36 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - 4040:9090
+    networks:
+      - monitoring
+
+  node-exporter:
+    image: prom/node-exporter
+    pid: "host"
+    restart: unless-stopped
+    ports:
+      - 9100:9100
+    networks:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    networks:
+      - monitoring
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    restart: unless-stopped
+
+networks:
+  monitoring:
+    driver: bridge
+
+volumes:
+  grafana-storage:
