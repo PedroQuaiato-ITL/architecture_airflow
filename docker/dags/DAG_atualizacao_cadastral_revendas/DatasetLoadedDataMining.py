@@ -1,6 +1,5 @@
 from airflow.models import Variable
 from Modules.DatabaseConfigurationConnection import DatabaseConfigurationConnection as hook
-from DAG_atualizacao_cadastral_revendas.Functions import Functions
 import uuid
 
 class DatasetLoadedDataMining:
@@ -31,7 +30,6 @@ class DatasetLoadedDataMining:
                 raise ValueError("Nenhum dado retornado da task executing_query_gnio")
 
             for revenda in response:
-                data_geo = Functions.get_geolocalization(revenda[4])
                 organized_data.append({
                     'uuid':         str(uuid.uuid4()),
                     'revenda':      revenda[1],
@@ -41,8 +39,6 @@ class DatasetLoadedDataMining:
                     'cep':          revenda[4],
                     'cidade':       revenda[5],
                     'estado':       revenda[6],
-                    'longitude':    data_geo.get('longitude'),
-                    'latitude':     data_geo.get('latitude'),
                     'email':        revenda[7],
                     'gerente':      revenda[8],
                     'categoria':    revenda[9]
@@ -81,8 +77,6 @@ class DatasetLoadedDataMining:
                         revenda['cep'],
                         revenda['cidade'],
                         revenda['estado'],
-                        revenda['longitude'],
-                        revenda['latitude'],
                         revenda['email'],
                         revenda['gerente'],
                         revenda['categoria'],
@@ -100,8 +94,6 @@ class DatasetLoadedDataMining:
                         revenda['cep'],
                         revenda['cidade'],
                         revenda['estado'],
-                        revenda['longitude'],
-                        revenda['latitude'],
                         revenda['email'],
                         revenda['gerente'],
                         revenda['categoria'],
