@@ -6,4 +6,4 @@ services:
     ports:
       - "9090:80"
     volumes:
-      - ./hub:/usr/share/nginx/html:ro
+      - ./hub:/usr/share/nginx/html/hub:ro
