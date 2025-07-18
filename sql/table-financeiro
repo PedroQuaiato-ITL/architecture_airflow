@@ -1,0 +1,13 @@
+CREATE TABLE financeiro_intelidata (
+    uuid uuid,
+    documento VARCHAR(255),
+    data_emissao date,
+    data_vencimento date
+    status VARCHAR(255),
+    tipo VARCHAR(255),
+    valor_bruto NUMERIC(12, 2),
+    valor_pendente NUMERIC(12, 2),
+    plano_contas VARCHAR(255),
+    centro_custo VARCHAR(255),
+    percentual NUMERIC(10, 6)
+)

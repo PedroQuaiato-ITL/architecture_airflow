@@ -143,6 +143,8 @@ class AnaliseDesempenhoRevendas(LoggingMixin):
             }
             df.rename(columns=rename_map, inplace=True)
 
+            df['degustacoes'] = df['degustacoes'].fillna(0).astype(int)
+
             # reordenar colunas
             colunas_ordem = ['uuid', 'revenda', 'contratos_faturados', 'recorrencia_projetada', 'diferenca_recorrencia', 'degustacoes', 'valor_degustacoes', 'ativacoes', 'cancelamentos', 'saldo', 'gerente', 'data_registro']
             df = df.reindex(columns=colunas_ordem)
